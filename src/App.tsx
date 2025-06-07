@@ -1,65 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML AI Projects</title>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #161A1D;
-            color: #333;
-        }
-        header {
-            background-color: #1e1e1e;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid #383D45;
-        }
-        main {
-            padding: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .project {
-            background-color: #161F27;
-            margin: 1rem;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: calc(33% - 2rem);
-            box-sizing: border-box;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .project h2 {
-            margin-top: 0;
-            color: #aaa;
-        }
-        .project p {
-            color: #7A8BA3;
-        }
-        @media (max-width: 768px) {
-            .project {
-                width: calc(50% - 2rem);
-            }
-        }
-        @media (max-width: 480px) {
-            .project {
-                width: calc(100% - 2rem);
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
+import './App.css';
+
+const App = () => {
+  return (
+    <div className="content">
+      <header>
         <h1>ML AI Projects 👾</h1>
     </header>
     <main>
@@ -73,7 +17,7 @@
             <p>Description: A project to analyze the sentiment of text data using natural language processing.</p>
             <p>Results: Achieved 90% accuracy on the sentiment analysis task.</p>
         </section>
-        <section>
+        {/* <section>
             <button onclick="sendData()">Send</button>
 
             <script>
@@ -102,8 +46,10 @@
                     .catch(err => console.error(err));
                 }
             </script>
-        </section>
-        <!-- Add more projects as needed -->
+        </section> */}
     </main>
-</body>
-</html></section>
+    </div>
+  );
+};
+
+export default App;
