@@ -1,10 +1,10 @@
-import './App.css'
+// import './App.css'
 // import { Input } from '@mantine/core'
 import { Container } from '@mantine/core';
 import GlobalNavigation from './components/GlobalNavigation'
 import HousePricePrediction from './pages/HousePricePrediction'
 import Page_2 from './pages/page_2'
-import { AppShell, Burger } from '@mantine/core';
+import { AppShell, Burger, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -22,13 +22,18 @@ function App() {
         padding="md"
       >
         <AppShell.Header>
-          
-          <p><Burger
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="sm"
-            size="sm"
-          />Machine Talking</p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+              style={{ marginRight: 12 }}
+            />
+            <Text size="lg" ta="center">
+              Machine Talking
+            </Text>
+          </div>
         </AppShell.Header>
 
         <AppShell.Navbar p="md">

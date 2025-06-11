@@ -1,4 +1,5 @@
 import { Text, Paper, Title } from '@mantine/core';
+import HousePricePredictionForm from '../components/HousePricePredictionForm';
 
 export default function HousePricePrediction() {
   return (
@@ -24,6 +25,14 @@ export default function HousePricePrediction() {
       <Text size="lg" ta="left">
         <strong>Results:</strong> 	With Final RMSE for value 41,448.08, confidence interval is [39,293.29, 43,496.26] with 95% confidence.
       </Text>
+      
+      <Text size="lg" ta="left">
+        <strong>Infrastructure:</strong> 	Model is running in AWS lambda, and accessible via API gateway endpoint.
+      </Text>
+
+      <HousePricePredictionForm />
+
+
     </Paper>
   );
 }
