@@ -1,7 +1,6 @@
-import { Button, Group, Select, NumberInput, Text, LoadingOverlay, Box } from '@mantine/core';
+import { Button, Group, Select, NumberInput, Text } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useMantineTheme } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 
 import { useState } from 'react';
 
@@ -19,7 +18,6 @@ interface HousePricePredictionFormValues {
 
 
 const HousePricePrediction = () => {
-  const [visible, { toggle }] = useDisclosure(true);
   type PredictionResponse = { predicted_price: number };
   
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
@@ -65,8 +63,6 @@ const HousePricePrediction = () => {
       ocean_proximity: [values.ocean_proximity],
     };
 
-    // toggle(); // Show loading overlay
-
     fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/predict', {
       method: 'POST',
       headers: {
@@ -77,7 +73,6 @@ const HousePricePrediction = () => {
       .then((response) => response.json())
       .then((data) => {
         setPrediction(data);
-        toggle(); // Hide loading overlay
         console.log('END OF FETCH');
         
       })
@@ -88,103 +83,94 @@ const HousePricePrediction = () => {
 
   return (
     <>
-      <Box pos="relative">
-        <LoadingOverlay
-          visible={!visible}
-          zIndex={1000}
-          overlayProps={{ radius: 'sm', blur: 2 }}
-          loaderProps={{ color: 'pink', type: 'bars' }}
+      <form onSubmit={form.onSubmit((values) => submitPrediction(values))}>
+        <NumberInput
+          withAsterisk
+          label="Longitude"
+          // description="Longitude"
+          placeholder="Longitude"
+          key={form.key('longitude')}
+          {...form.getInputProps('longitude')}
         />
-        <form onSubmit={form.onSubmit((values) => submitPrediction(values))}>
-          <NumberInput
-            withAsterisk
-            label="Longitude"
-            // description="Longitude"
-            placeholder="Longitude"
-            key={form.key('longitude')}
-            {...form.getInputProps('longitude')}
-          />
-          <NumberInput
-            withAsterisk
-            label="Latitude"
-            // description="latitude"
-            placeholder="latitude"
-            key={form.key('latitude')}
-            {...form.getInputProps('latitude')}
-          />
-          <NumberInput
-            withAsterisk
-            label="Housing median age"
-            placeholder="Housing median age"
-            key={form.key('housing_median_age')}
-            {...form.getInputProps('housing_median_age')}
-          />
-          
-          <NumberInput
-            withAsterisk
-            label="Total rooms"
-            placeholder="Total rooms"
-            key={form.key('total_rooms')}
-            {...form.getInputProps('total_rooms')}
-          />
-          
-          <NumberInput
-            withAsterisk
-            label="Total bedrooms"
-            placeholder="Total bedrooms"
-            key={form.key('total_bedrooms')}
-            {...form.getInputProps('total_bedrooms')}
-          />
-          
-          <NumberInput
-            withAsterisk
-            label="Population"
-            placeholder="Population"
-            key={form.key('population')}
-            {...form.getInputProps('population')}
-          />
-          
-          <NumberInput
-            withAsterisk
-            label="Households"
-            placeholder="Households"
-            key={form.key('households')}
-            {...form.getInputProps('households')}
-          />
-          
-          <NumberInput
-            withAsterisk
-            label="Median income"
-            placeholder="Median income"
-            key={form.key('median_income')}
-            {...form.getInputProps('median_income')}
-          />
-          
-          <Select
-            withAsterisk
-            label="Ocean proximity"
-            placeholder="Pick value"
-            key={form.key('ocean_proximity')}
-            data={['<1H OCEAN', '<2H OCEAN']}
-            {...form.getInputProps('ocean_proximity')}
-          />
+        <NumberInput
+          withAsterisk
+          label="Latitude"
+          // description="latitude"
+          placeholder="latitude"
+          key={form.key('latitude')}
+          {...form.getInputProps('latitude')}
+        />
+        <NumberInput
+          withAsterisk
+          label="Housing median age"
+          placeholder="Housing median age"
+          key={form.key('housing_median_age')}
+          {...form.getInputProps('housing_median_age')}
+        />
+        
+        <NumberInput
+          withAsterisk
+          label="Total rooms"
+          placeholder="Total rooms"
+          key={form.key('total_rooms')}
+          {...form.getInputProps('total_rooms')}
+        />
+        
+        <NumberInput
+          withAsterisk
+          label="Total bedrooms"
+          placeholder="Total bedrooms"
+          key={form.key('total_bedrooms')}
+          {...form.getInputProps('total_bedrooms')}
+        />
+        
+        <NumberInput
+          withAsterisk
+          label="Population"
+          placeholder="Population"
+          key={form.key('population')}
+          {...form.getInputProps('population')}
+        />
+        
+        <NumberInput
+          withAsterisk
+          label="Households"
+          placeholder="Households"
+          key={form.key('households')}
+          {...form.getInputProps('households')}
+        />
+        
+        <NumberInput
+          withAsterisk
+          label="Median income"
+          placeholder="Median income"
+          key={form.key('median_income')}
+          {...form.getInputProps('median_income')}
+        />
+        
+        <Select
+          withAsterisk
+          label="Ocean proximity"
+          placeholder="Pick value"
+          key={form.key('ocean_proximity')}
+          data={['<1H OCEAN', '<2H OCEAN']}
+          {...form.getInputProps('ocean_proximity')}
+        />
 
-          <Group justify="flex-end" mt="md">
-            <Button onClick={toggle} type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
 
-      {
-        prediction && (
-          <Text size="lg" ta="left" mt="md" style={{
-        backgroundColor: theme.colors.blue[1],
-        color: theme.colors.blue[9],
-      }} p="md">
-            <strong>Predicted Price:</strong> {prediction.predicted_price}
-          </Text>
-        )
-      }
+      { prediction ? 
+      <Text 
+        style={{backgroundColor: theme.colors.blue[1],color: theme.colors.blue[9]}} 
+        size="lg" 
+        ta="left" 
+        mt="md" 
+        p="md">
+        <strong>Predicted Price:</strong> {prediction?.predicted_price}
+      </Text> : ''}
     </>
   );
 }
