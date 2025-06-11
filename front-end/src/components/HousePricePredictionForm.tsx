@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button, Group, Select, NumberInput } from '@mantine/core';
+import { Button, Group, Select, NumberInput, Text } from '@mantine/core';
 import { useForm } from '@mantine/form';
-// import { useMantineTheme } from '@mantine/core';
+import { useMantineTheme } from '@mantine/core';
 
 
 interface HousePricePredictionFormValues {
@@ -22,7 +22,7 @@ const HousePricePrediction = () => {
   
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
   
-  // const theme = useMantineTheme();
+  const theme = useMantineTheme();
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
@@ -72,10 +72,7 @@ const HousePricePrediction = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setPrediction(data);
-        console.log('END OF FETCH');
-        
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -163,17 +160,14 @@ const HousePricePrediction = () => {
         </Group>
       </form>
 
-      <p><strong>Predicted Price:</strong> {prediction?.predicted_price}</p>
-
-      {/* { prediction ? 
       <Text 
-        style={{backgroundColor: theme.colors.blue[1],color: theme.colors.blue[9]}} 
-        size="lg" 
-        ta="left" 
-        mt="md" 
-        p="md">
+          style={{backgroundColor: theme.colors.blue[1],color: theme.colors.blue[9]}} 
+          size="lg" 
+          ta="left" 
+          mt="md" 
+          p="md">
         <strong>Predicted Price:</strong> {prediction?.predicted_price}
-      </Text> : ''} */}
+      </Text>
     </>
   );
 }
