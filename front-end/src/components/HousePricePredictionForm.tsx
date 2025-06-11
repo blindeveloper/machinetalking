@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { Button, Group, Select, NumberInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 // import { useMantineTheme } from '@mantine/core';
 
-// import { useState } from 'react';
 
 interface HousePricePredictionFormValues {
   longitude: number;
@@ -18,9 +18,9 @@ interface HousePricePredictionFormValues {
 
 
 const HousePricePrediction = () => {
-  // type PredictionResponse = { predicted_price: number };
+  type PredictionResponse = { predicted_price: number };
   
-  // const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
+  const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
   
   // const theme = useMantineTheme();
   const form = useForm({
@@ -72,8 +72,8 @@ const HousePricePrediction = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // setPrediction(data);
+        // console.log(data);
+        setPrediction(data);
         console.log('END OF FETCH');
         
       })
@@ -162,6 +162,8 @@ const HousePricePrediction = () => {
           <Button type="submit">Submit</Button>
         </Group>
       </form>
+
+      <p><strong>Predicted Price:</strong> {prediction?.predicted_price}</p>
 
       {/* { prediction ? 
       <Text 
