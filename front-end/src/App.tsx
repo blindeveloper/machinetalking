@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 function App() {
   const [opened, { toggle }] = useDisclosure();
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="./">
       <AppShell
         header={{ height: 60 }}
         navbar={{
