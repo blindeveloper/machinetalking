@@ -34,7 +34,7 @@ function App() {
                 style={{border: '2px solid black'}} 
                 radius="md"
                 h={50}
-                src="./src/assets/logo.png"
+                src="./logo.png"
               />
               </Text>
           </div>
