@@ -13,7 +13,7 @@ Goal is to Achieve around 90% accuracy on the test dataset.
 `pip3 install -r requirements.txt`
 
 **Run**
-`python3 main.py`
+`python3 get_model.py`
 
 # INFRA
 # Generating AWS layers
