@@ -1,10 +1,9 @@
 // import './App.css'
 // import { Input } from '@mantine/core'
-import { Container } from '@mantine/core';
 import GlobalNavigation from './components/GlobalNavigation'
 import HousePricePrediction from './pages/HousePricePrediction'
-import Page_2 from './pages/page_2'
-import { AppShell, Burger, Text } from '@mantine/core';
+import Mnist from './pages/mnist'
+import { AppShell, Burger, Text, Container, Image } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -22,7 +21,7 @@ function App() {
         padding="md"
       >
         <AppShell.Header>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'left', height: '100%', paddingLeft: 16 }}>
             <Burger
               opened={opened}
               onClick={toggle}
@@ -30,9 +29,14 @@ function App() {
               size="sm"
               style={{ marginRight: 12 }}
             />
-            <Text size="lg" ta="center">
-              Machine Talking
-            </Text>
+            <Text style={{fontSize: 35}} ta="center">
+               <Image
+                style={{border: '2px solid black'}} 
+                radius="md"
+                h={50}
+                src="./src/assets/logo.png"
+              />
+              </Text>
           </div>
         </AppShell.Header>
 
@@ -44,7 +48,7 @@ function App() {
             <Container>
               <Routes>
                 <Route path="/" element={<HousePricePrediction />} />
-                <Route path="/house-price" element={<Page_2 />} />
+                <Route path="/mnist" element={<Mnist />} />
               </Routes>
             </Container>
         </AppShell.Main>
@@ -53,5 +57,4 @@ function App() {
   )
 }
 
-{/* <GetHousePricePredictionForm /> */}
 export default App

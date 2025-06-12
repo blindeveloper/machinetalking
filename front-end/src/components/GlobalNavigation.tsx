@@ -18,13 +18,13 @@ function GetHousePricePredictionForm(props: GetHousePricePredictionFormProps) {
         active={location.pathname === '/'}
         onClick={props.toggle}
       />
-      {/* <NavLink
+      <NavLink
         component={Link}
-        to="/house-price"
-        label="Page 2"
-        active={location.pathname === '/house-price'}
+        to="/mnist"
+        label="MNIST"
+        active={location.pathname === '/mnist'}
         onClick={props.toggle}
-      /> */}
+      />
     </nav>
   );
 }
