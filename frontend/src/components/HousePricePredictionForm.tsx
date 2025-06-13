@@ -79,8 +79,8 @@ const HousePricePrediction = () => {
         toggle()
       })
       .catch((error) => {
-        console.error(error);
         setIsServerError(true);
+        console.error(error);
       });
   }
 
