@@ -23,6 +23,7 @@ const HousePricePrediction = () => {
 
   const [visible, { toggle }] = useDisclosure(true);
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
+  const [isServerError, setIsServerError] = useState<Boolean>(false);
   
   const theme = useMantineTheme();
   const form = useForm({
@@ -78,7 +79,8 @@ const HousePricePrediction = () => {
         toggle()
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error(error);
+        setIsServerError(true);
       });
   }
 
@@ -172,12 +174,19 @@ const HousePricePrediction = () => {
       </Box>
 
       <Text 
-          style={{backgroundColor: theme.colors.blue[1],color: theme.colors.blue[9]}} 
+          style={{
+            backgroundColor: isServerError ? theme.colors.red[1] : theme.colors.blue[1],
+            color: theme.colors.blue[9]
+          }} 
           size="lg" 
           ta="left" 
           mt="md" 
           p="md">
-        <strong>Predicted Price:</strong> {prediction?.predicted_price}
+        {
+          isServerError ? 
+            <span style={{ color: theme.colors.red[9] }}>Something went wrong, we are fixing it.</span> :
+            <span><strong>Predicted Price: </strong> {prediction?.predicted_price}</span>
+        }
       </Text>
     </>
   );
