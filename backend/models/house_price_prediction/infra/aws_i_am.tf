@@ -14,6 +14,31 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
+resource "aws_iam_role_policy" "lambda_s3_access" {
+  name = "lambda_s3_access"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:GetObject"
+        ],
+        Resource = "${aws_s3_bucket.model_bucket.arn}/*"
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:ListBucket"
+        ],
+        Resource = "${aws_s3_bucket.model_bucket.arn}/*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role" "lambda_exec" {
   name = "lambda_exec_role"
 
