@@ -1,4 +1,4 @@
-# Lambda Function
+# House price prediction Lambda Function
 resource "aws_lambda_function" "house_price_prediction_lambda" {
   function_name    = "house-price-prediction"
   runtime          = "python3.9"
@@ -8,8 +8,8 @@ resource "aws_lambda_function" "house_price_prediction_lambda" {
   memory_size      = 512
   architectures    = ["arm64"]  # Define the architecture (e.g., x86_64 or arm64)
 
-  filename         = "./bundles/house_price_prediction_lmb_17490449163N.zip"  # Package your Lambda code into a ZIP file
-  source_code_hash = filebase64sha256("./bundles/house_price_prediction_lmb_17490449163N.zip")
+  filename         = "../bundles/lr_lmb_17545851743N.zip"  # Package your Lambda code into a ZIP file
+  source_code_hash = filebase64sha256("../bundles/lr_lmb_17545851743N.zip")
 
   environment {
     variables = {
@@ -21,6 +21,27 @@ resource "aws_lambda_function" "house_price_prediction_lambda" {
     aws_lambda_layer_version.external_packages_layer.arn,
     aws_lambda_layer_version.internal_packages_layer.arn,
   ]
+}
+
+# Linear regression Lambda Function
+resource "aws_lambda_function" "lr_lambda" {
+  function_name    = "lr-prediction"
+  runtime          = "python3.9"
+  handler          = "lr_lambda.lambda_handler"
+  role             = aws_iam_role.lambda_role.arn
+  timeout          = 60
+  memory_size      = 512
+  architectures    = ["arm64"]  # Define the architecture (e.g., x86_64 or arm64)
+
+  filename         = "../bundles/lr_lmb_17545851743N.zip"  # Package your Lambda code into a ZIP file
+  source_code_hash = filebase64sha256("../bundles/lr_lmb_17545851743N.zip")
+
+  environment {
+    variables = {
+      LR_MODEL_S3_BUCKET = aws_s3_bucket.lr_model_bucket.id
+      LR_MODEL_S3_KEY    = "model.pth"
+    }
+  }
 }
 
 resource "aws_lambda_permission" "apigw" {

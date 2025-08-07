@@ -3,16 +3,16 @@
 resource "aws_s3_object" "external_packages_layer" {
   bucket = aws_s3_bucket.model_bucket.id
   key    = "external_pkgs_layer_17448089863N.zip"
-  source = "./bundles/external_pkgs_layer_17448089863N.zip" # Path to your local zip file
-  etag   = filemd5("./bundles/external_pkgs_layer_17448089863N.zip")
+  source = "../bundles/external_pkgs_layer_17448089863N.zip" # Path to your local zip file
+  etag   = filemd5("../bundles/external_pkgs_layer_17448089863N.zip")
 }
 
 # Upload internal_packages_layer to S3
 resource "aws_s3_object" "internal_packages_layer" {
   bucket = aws_s3_bucket.model_bucket.id
   key    = "internal_packages_layer_17447254283N.zip"
-  source = "./bundles/internal_packages_layer_17447254283N.zip" # Path to your local zip file
-  etag   = filemd5("./bundles/internal_packages_layer_17447254283N.zip")
+  source = "../bundles/internal_packages_layer_17447254283N.zip" # Path to your local zip file
+  etag   = filemd5("../bundles/internal_packages_layer_17447254283N.zip")
 }
 
 # =============================================Creation of Layers

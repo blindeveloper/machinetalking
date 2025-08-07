@@ -12,4 +12,9 @@
 `python3 build_model.py`
 
 **Infra**
-1. Upload model to S3 bucket
+1. Upload model to S3 bucket using tf
+2. Create Lambda function
+    2-a. Get model from S3 bucket
+    2-b. Use model for predictions
+3. Convert Lambda Function to zip file using `build_lr_lmb.sh` script
+4. Upload Lambda to AWS using tf
