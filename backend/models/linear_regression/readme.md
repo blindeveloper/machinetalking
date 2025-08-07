@@ -10,3 +10,6 @@
 
 **Run**
 `python3 build_model.py`
+
+**Infra**
+1. Upload model to S3 bucket

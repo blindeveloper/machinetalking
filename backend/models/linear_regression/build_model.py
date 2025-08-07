@@ -1,33 +1,33 @@
 # Device agnostic version
 import torch
 from torch import nn
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from pathlib import Path
 
 MODEL_PATH = Path("saved_models")
 MODEL_SAVE_PATH = MODEL_PATH / "model.pth"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-def plot_data(train_data,
-                     train_labels,
-                     test_data,
-                     test_labels,
-                     predictions=None):
-  """
-  PLots training data, test data and compares predictions.
-  """
-  plt.figure(figsize=(10, 7))
-  # Are there predictions?
-  if predictions is not None:
-    plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
-  # Plot training data in blue
-  plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
-  # Plot testing data in green
-  plt.scatter(test_data, test_labels, c="y", s=4, label="Testing data")
+# def plot_data(train_data,
+#                      train_labels,
+#                      test_data,
+#                      test_labels,
+#                      predictions=None):
+#   """
+#   PLots training data, test data and compares predictions.
+#   """
+#   plt.figure(figsize=(10, 7))
+#   # Are there predictions?
+#   if predictions is not None:
+#     plt.scatter(test_data, predictions, c="r", s=4, label="Predictions")
+#   # Plot training data in blue
+#   plt.scatter(train_data, train_labels, c="b", s=4, label="Training data")
+#   # Plot testing data in green
+#   plt.scatter(test_data, test_labels, c="y", s=4, label="Testing data")
   
-  # Show the legends
-  plt.legend(prop={"size":14})
-  plt.show()
+#   # Show the legends
+#   plt.legend(prop={"size":14})
+#   plt.show()
 
 def get_data():
   #===============================================================================
@@ -146,16 +146,25 @@ def evaluate_loaded_model(loaded_model, X_test, y_preds):
     print(f"Original test labels: {y_preds[:10]}")
     print(f"Loaded model predictions equal to original: {loaded_model_preds == y_preds}")
 
+def get_model_single_number_prediction(model, number):
+  model.eval()
+  with torch.inference_mode():
+    number_tensor = torch.tensor([float(number)]).unsqueeze(dim=1)
+    return model(number_tensor)
+
+
 X_train, y_train, X_test, y_test = get_data()
-plot_data(X_train, y_train, X_test, y_test)
+# plot_data(X_train, y_train, X_test, y_test)
 
 initial_model = get_initial_model()
 trained_model = get_trained_model(initial_model, X_train, X_test)
 
 y_preds = get_model_predictions(trained_model, X_test)
-plot_data(X_train, y_train, X_test, y_test, predictions=y_preds.cpu())
+# plot_data(X_train, y_train, X_test, y_test, predictions=y_preds.cpu())
 
 save_model(trained_model)
 loaded_model = get_loaded_model()
 loaded_y_preds = get_model_predictions(loaded_model, X_test)
-plot_data(X_train, y_train, X_test, y_test, predictions=loaded_y_preds.cpu())
+# plot_data(X_train, y_train, X_test, y_test, predictions=loaded_y_preds.cpu())
+pred = get_model_single_number_prediction(loaded_model, 200)
+print("pred: ", pred)
