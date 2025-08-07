@@ -5,7 +5,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.dummy import DummyClassifier
 from sklearn.model_selection import cross_val_predict
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 
 def generate_model():
     # Fetch the MNIST dataset
@@ -97,6 +97,25 @@ def generate_model():
     print('======>cm_pretended:', cm_pretended)
     # array([[54579,     0],
     #        [    0,  5421]])
+
+    # Precision and Recall
+
+    
+    precision_score_value = precision_score(y_train_5, y_train_pred)  # == 3530 / (687 + 3530)
+    print('======>precision_score_value:', precision_score_value)
+    # 0.8370879772350012
+    recall_score_value = recall_score(y_train_5, y_train_pred)  # == 3530 / (1891 + 3530)
+    print('======>recall_score_value:', recall_score_value)
+    # 0.6511713705958311
+
+    # Now our 5-detector does not look as shiny as it did when we looked at its accuracy. 
+    # When it claims an image represents a 5, it is correct only 83.7% of the time. 
+    # Moreover, it only detects 65.1% of the 5s.
+
+    
+    f1_score_value = f1_score(y_train_5, y_train_pred)
+    print('======>f1_score_value:', f1_score_value)
+    # 0.7325171197343846
 
 
 
