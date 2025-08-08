@@ -4,7 +4,7 @@ export PKG_DIR="python"
 mkdir -p ${PKG_DIR}
 # Get the current timestamp in milliseconds to create a unique filename
 current_time_ms=$(date +%s%3N)
-file_name="external_pkgs_layer_${current_time_ms}.zip"
+file_name="house_price_pred_external_pkgs_layer_${current_time_ms}.zip"
 
 # Use a Docker container with the lambci/lambda image to install Python dependencies
 docker run --rm --platform linux/arm64 -v $(pwd):/foo -w /foo public.ecr.aws/sam/build-python3.9:latest \
@@ -21,7 +21,8 @@ find ${PKG_DIR} -name "docs" -type d -exec rm -rf {} +
 zip -r9 ${file_name} ./python/
 
 # Move the zip file to the bundles folder two levels up
-mv ${file_name} ../infra/bundles/
+mkdir -p ../../bundles/house_price_prediction
+mv ${file_name} ../../bundles/house_price_prediction/
 
 # Clean up the `${PKG_DIR}` directory and recreate it as an empty directory
 rm -rf ${PKG_DIR}

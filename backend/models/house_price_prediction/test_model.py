@@ -2,9 +2,9 @@ import pandas as pd
 import pickle
 
 def test_model():
-    with open("../infra/bundles/model_1744656136812.pkl", "rb") as f:
+    with open("../../bundles/house_price_prediction/house_price_prediction_model_1754655002601.pkl", "rb") as f:
         model = pickle.load(f)
-    test_set = pd.read_csv("../infra/bundles/strat_test_set.csv")
+    test_set = pd.read_csv("./datasets/strat_test_set.csv")
 
     # print('======>test_set:', test_set)
 

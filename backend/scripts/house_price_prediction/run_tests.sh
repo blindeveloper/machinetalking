@@ -1,0 +1,1 @@
+python3 ../../models/house_price_prediction/test_model.py

@@ -18,7 +18,7 @@ import time
 
 def generate_model():
     def load_housing_data():
-        tarball_path = Path("../datasets/housing.tgz")
+        tarball_path = Path("./datasets/housing.tgz")
 
         if not tarball_path.is_file():
             Path("../datasets").mkdir(parents=True, exist_ok=True)
@@ -26,7 +26,7 @@ def generate_model():
             urllib.request.urlretrieve(url, tarball_path)
             with tarfile.open(tarball_path) as housing_tarball:
                 housing_tarball.extractall(path="datasets")
-        return pd.read_csv(Path("../datasets/housing/housing.csv"))
+        return pd.read_csv(Path("./datasets/housing/housing.csv"))
 
     def get_test_train_sets(housing):
         #################################################################################################################################
@@ -83,7 +83,7 @@ def generate_model():
     init_housing = load_housing_data()
     # 2. getting training and test sets
     strat_train_set, strat_test_set = get_test_train_sets(init_housing)
-    strat_test_set.to_csv('../infra/bundles/strat_test_set.csv', index=False)
+    strat_test_set.to_csv('./datasets/strat_test_set.csv', index=False)
     # we explore only strat_train_set
     # from now our housing is a copy of strat_train_set
     housing = strat_train_set.copy()
@@ -131,12 +131,12 @@ def generate_model():
     final_rmse, comparison = evaluate_model.get_final_results()
     print('======>final_rmse:', final_rmse) #41448.084299370465
     print('======>comparison:', comparison) #[39293.29060201 43496.26073402]
-
     # Saving model, using pickle library
     current_time_ms = int(time.time() * 1000)
-    Path("../infra/bundles").mkdir(parents=True, exist_ok=True)
-    model_filename = f"model_{current_time_ms}.pkl"
-    with open(f"../infra/bundles/{model_filename}", "wb") as f:
+    print("Current working directory:", Path.cwd())
+    Path("../../bundles/house_price_prediction").mkdir(parents=True, exist_ok=True)
+    model_filename = f"house_price_prediction_model_{current_time_ms}.pkl"
+    with open(f"../../bundles/house_price_prediction/{model_filename}", "wb") as f:
         pickle.dump(final_model, f)
     print(f"Model saved as {model_filename}")
 

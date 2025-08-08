@@ -8,8 +8,8 @@ resource "aws_lambda_function" "house_price_prediction_lambda" {
   memory_size      = 512
   architectures    = ["arm64"]  # Define the architecture (e.g., x86_64 or arm64)
 
-  filename         = "../bundles/lr_lmb_17545851743N.zip"  # Package your Lambda code into a ZIP file
-  source_code_hash = filebase64sha256("../bundles/lr_lmb_17545851743N.zip")
+  filename         = "../bundles/house_price_prediction/house_price_prediction_lmb_17546523183N.zip"  # Package your Lambda code into a ZIP file
+  source_code_hash = filebase64sha256("../bundles/house_price_prediction/house_price_prediction_lmb_17546523183N.zip")
 
   environment {
     variables = {
@@ -33,8 +33,8 @@ resource "aws_lambda_function" "lr_lambda" {
   memory_size      = 512
   architectures    = ["arm64"]  # Define the architecture (e.g., x86_64 or arm64)
 
-  filename         = "../bundles/lr_lmb_17545851743N.zip"  # Package your Lambda code into a ZIP file
-  source_code_hash = filebase64sha256("../bundles/lr_lmb_17545851743N.zip")
+  filename         = "../bundles/linear_regression/lin_reg_lambda_17546554923N.zip"  # Package your Lambda code into a ZIP file
+  source_code_hash = filebase64sha256("../bundles/linear_regression/lin_reg_lambda_17546554923N.zip")
 
   environment {
     variables = {
