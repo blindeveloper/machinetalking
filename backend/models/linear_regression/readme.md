@@ -1,4 +1,4 @@
-# Installation process:
+# local Installation process:
 **Init new virtual environment**
 `python3 -m venv venv`
 
@@ -11,13 +11,12 @@
 **Run**
 `python3 build_model.py`
 
-**Infra guide**
+# Prod infra guide
+0. Generate model locally using prev steps
 1. Upload model to S3 bucket using tf
-2. Create Lambda function .py file
-3. Convert Lambda Function to .zip file using `build_lr_lmb.sh` script
-4. Upload Lambda to AWS using tf
-5. Generate layer file for packages using `build_lr_external_packages_layer.sh` script (f.e. with torch)
-6. Create and upload layer to AWS using tf
-7. Connect layer with lambda using tf
-8. Read model from S3 bucket (all packages should be in layers)
-9. Use model for predictions 
+2. Write lambda in app.py
+3. Make Docker file with instructions to contain image with pytorch
+4. Run build_and_push_lambda script to build and push image with pytorch and lambda to AWS ECR
+5. Copy image tag from console and paste it in lambda variables tf file
+6. Run terraform apply to set new lambda alive
+7. Test lambda
