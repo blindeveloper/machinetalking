@@ -3,6 +3,7 @@ import boto3
 import torch
 from torch import nn
 s3 = boto3.client("s3")
+import json
 
 MODEL_SAVE_PATH = '/tmp/model.pth'
 
@@ -32,7 +33,13 @@ def get_model_single_number_prediction(model, number):
 def lambda_handler(event, context):
     try:
         model = get_loaded_model()
-        pred = get_model_single_number_prediction(model, 200)
+        body = json.loads(event["body"])
+        if "numerical_value" not in body:
+          return {
+              "statusCode": 400,
+              "body": "Missing 'numerical_value' in request body"
+          }
+        pred = get_model_single_number_prediction(model, body["numerical_value"])
         return {
             "statusCode": 200,
             "body": pred.item()  # Convert tensor to a Python number
