@@ -3,7 +3,7 @@
 import GlobalNavigation from './components/GlobalNavigation'
 import HousePricePrediction from './pages/HousePricePrediction'
 import Mnist from './pages/mnist'
-import { AppShell, Burger, Text, Container, Image } from '@mantine/core';
+import { AppShell, Burger, Text, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -29,13 +29,8 @@ function App() {
               size="sm"
               style={{ marginRight: 12 }}
             />
-            <Text style={{fontSize: 35}} ta="center">
-               <Image
-                style={{border: '2px solid black'}} 
-                radius="md"
-                h={50}
-                src="./logo.png"
-              />
+            <Text style={{fontSize: 24}} ta="center">
+              <strong>Machine talking</strong> only when human is lazy enough to stop seeking with their own mind
               </Text>
           </div>
         </AppShell.Header>
