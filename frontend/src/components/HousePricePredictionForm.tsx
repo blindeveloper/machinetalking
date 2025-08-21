@@ -66,7 +66,7 @@ const HousePricePrediction = () => {
       ocean_proximity: [values.ocean_proximity],
     };
 
-    fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/predict', {
+    fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/house_price/predict', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

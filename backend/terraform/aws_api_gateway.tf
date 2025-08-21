@@ -22,12 +22,12 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   integration_uri  = aws_lambda_function.house_price_prediction_lambda.invoke_arn
 }
 
-resource "aws_apigatewayv2_route" "lambda_route" {
-  api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = "POST /predict"
-  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
-}
-
 output "api_gateway_url" {
   value = aws_apigatewayv2_api.http_api.api_endpoint
+}
+
+resource "aws_apigatewayv2_route" "lambda_route" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "POST /house_price/predict"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
