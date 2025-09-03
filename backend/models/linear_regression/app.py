@@ -29,21 +29,29 @@ def get_model_single_number_prediction(model, number):
   with torch.inference_mode():
     number_tensor = torch.tensor([float(number)]).unsqueeze(dim=1)
     return model(number_tensor)
+  
 
 def lambda_handler(event, context):
     try:
-        model = get_loaded_model()
-        body = json.loads(event["body"])
-        if "numerical_value" not in body:
-          return {
-              "statusCode": 400,
-              "body": "Missing 'numerical_value' in request body"
-          }
-        pred = get_model_single_number_prediction(model, body["numerical_value"])
+      model = get_loaded_model()
+      body = json.loads(event["body"])
+      if "numerical_value" not in body:
         return {
-            "statusCode": 200,
-            "body": pred.item()  # Convert tensor to a Python number
+            "statusCode": 400,
+            "body": "Missing 'numerical_value' in request body"
         }
+
+      number = body["numerical_value"]
+      y_prediction = get_model_single_number_prediction(model, number)
+      prediction_value = y_prediction.squeeze(dim=1).tolist()[0]
+      
+      return  {
+        "statusCode": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": json.dumps({"prediction": prediction_value})
+      }
     except Exception as e:
         return {
             "statusCode": 500,

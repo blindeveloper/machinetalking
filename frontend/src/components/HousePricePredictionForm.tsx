@@ -5,17 +5,17 @@ import {  } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 
-// interface HousePricePredictionFormValues {
-//   longitude: number;
-//   latitude: number;
-//   housing_median_age: number;
-//   total_rooms: number;
-//   total_bedrooms: number;
-//   population: number;
-//   households: number;
-//   median_income: number;
-//   ocean_proximity: string;
-// }
+interface HousePricePredictionFormValues {
+  longitude: number;
+  latitude: number;
+  housing_median_age: number;
+  total_rooms: number;
+  total_bedrooms: number;
+  population: number;
+  households: number;
+  median_income: number;
+  ocean_proximity: string;
+}
 
 
 const HousePricePrediction = () => {
@@ -53,43 +53,20 @@ const HousePricePrediction = () => {
     },
   });
 
-  // const submitPrediction = (values: HousePricePredictionFormValues) => {
-  //   const payload = {
-  //     longitude: [values.longitude],
-  //     latitude: [values.latitude],
-  //     housing_median_age: [values.housing_median_age],
-  //     total_rooms: [values.total_rooms],
-  //     total_bedrooms: [values.total_bedrooms],
-  //     population: [values.population],
-  //     households: [values.households],
-  //     median_income: [values.median_income],
-  //     ocean_proximity: [values.ocean_proximity],
-  //   };
-
-  //   fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/house_price/predict', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(payload),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setPrediction(data);
-  //       toggle()
-  //     })
-  //     .catch((error) => {
-  //       setIsServerError(true);
-  //       console.error(error);
-  //     });
-  // }
-
-  const submitPrediction_v2 = () => {
+  const submitPrediction = (values: HousePricePredictionFormValues) => {
     const payload = {
-      numerical_value: [234]
+      longitude: [values.longitude],
+      latitude: [values.latitude],
+      housing_median_age: [values.housing_median_age],
+      total_rooms: [values.total_rooms],
+      total_bedrooms: [values.total_bedrooms],
+      population: [values.population],
+      households: [values.households],
+      median_income: [values.median_income],
+      ocean_proximity: [values.ocean_proximity],
     };
 
-    fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/lin_reg/predict', {
+    fetch('https://q790y4een3.execute-api.eu-central-1.amazonaws.com/house_price/predict', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -116,8 +93,7 @@ const HousePricePrediction = () => {
           overlayProps={{ radius: 'sm', blur: 2 }}
           loaderProps={{ color: 'pink', type: 'bars' }}
         />
-        {/* <form onSubmit={form.onSubmit((values) => submitPrediction(values))}> */}
-        <form onSubmit={form.onSubmit(() => submitPrediction_v2())}>
+        <form onSubmit={form.onSubmit((values) => submitPrediction(values))}>
           <NumberInput
             withAsterisk
             label="Longitude"

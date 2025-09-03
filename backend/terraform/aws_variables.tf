@@ -13,5 +13,5 @@ variable "lambda_function_name" {
 }
 
 variable "image_tag" {
-  default = "20250813141044"
+  default = "20250903215442"
 }

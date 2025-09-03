@@ -30,6 +30,14 @@ resource "aws_lambda_permission" "apigw" {
   source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*"
 }
 
+resource "aws_lambda_permission" "allow_http_api_pytorch" {
+  statement_id  = "AllowAPIGatewayInvokePytorch"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.pytorch_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*"
+}
+
 # Lambda function (using ECR container image)
 resource "aws_lambda_function" "pytorch_lambda" {
   function_name = var.lambda_function_name

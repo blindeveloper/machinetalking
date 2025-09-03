@@ -3,6 +3,7 @@
 import GlobalNavigation from './components/GlobalNavigation'
 import HousePricePrediction from './pages/HousePricePrediction'
 import Mnist from './pages/mnist'
+import LinearRegression from './pages/LinearRegression'
 import { AppShell, Burger, Text, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
@@ -44,6 +45,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HousePricePrediction />} />
                 <Route path="/mnist" element={<Mnist />} />
+                <Route path="/linear-regression" element={<LinearRegression />} />
               </Routes>
             </Container>
         </AppShell.Main>

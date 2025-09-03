@@ -25,6 +25,13 @@ function GetHousePricePredictionForm(props: GetHousePricePredictionFormProps) {
         active={location.pathname === '/mnist'}
         onClick={props.toggle}
       />
+      <NavLink
+        component={Link}
+        to="/linear-regression"
+        label="Linear Regression"
+        active={location.pathname === '/linear-regression'}
+        onClick={props.toggle}
+      />
     </nav>
   );
 }
