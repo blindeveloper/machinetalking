@@ -3,31 +3,31 @@ import { Link } from 'react-router-dom';
 
 
 
-type GetHousePricePredictionFormProps = {
+type GlobalNavigationProps = {
   toggle: () => void;
 };
 
-function GetHousePricePredictionForm(props: GetHousePricePredictionFormProps) {
+function GlobalNavigation(props: GlobalNavigationProps) {
 
   return (
     <nav style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <NavLink
         component={Link}
-        to="/"
+        to="/lab/house-price-prediction"
         label="House price prediction"
-        active={location.pathname === '/'}
+        active={location.pathname === '/house-price-prediction'}
         onClick={props.toggle}
       />
       <NavLink
         component={Link}
-        to="/mnist"
+        to="/lab/mnist"
         label="MNIST"
         active={location.pathname === '/mnist'}
         onClick={props.toggle}
       />
       <NavLink
         component={Link}
-        to="/linear-regression"
+        to="/lab/linear-regression"
         label="Linear Regression"
         active={location.pathname === '/linear-regression'}
         onClick={props.toggle}
@@ -36,4 +36,4 @@ function GetHousePricePredictionForm(props: GetHousePricePredictionFormProps) {
   );
 }
 
-export default GetHousePricePredictionForm;
+export default GlobalNavigation;

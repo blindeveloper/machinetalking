@@ -1,0 +1,18 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 100%;
+  padding-left: 16px;
+  background-color: black;
+  color: white;
+  a {
+    width: 90px;
+    &:hover {
+      background-color: #000;
+      text-decoration: underline;
+      text-emphasis: none;
+    }
+  }
+}
+

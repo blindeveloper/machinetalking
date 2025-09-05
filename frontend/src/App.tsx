@@ -1,53 +1,45 @@
-// import './App.css'
-// import { Input } from '@mantine/core'
-import GlobalNavigation from './components/GlobalNavigation'
-import HousePricePrediction from './pages/HousePricePrediction'
-import Mnist from './pages/mnist'
-import LinearRegression from './pages/LinearRegression'
-import { AppShell, Burger, Text, Container } from '@mantine/core';
+import './App.css';
+import Lab from './pages/Lab'
+import Home from './pages/Home'
+import { AppShell, Burger } from '@mantine/core';
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import { NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   const [opened, { toggle }] = useDisclosure();
+
   return (
     <BrowserRouter basename="/">
-      <AppShell
-        header={{ height: 60 }}
+      <AppShell 
+        header={{ height: 60 }} 
+        // padding="md"
         navbar={{
-          width: 300,
-          breakpoint: 'sm',
-          collapsed: { mobile: !opened },
-        }}
-        padding="md"
+        width: '',
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
       >
         <AppShell.Header>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'left', height: '100%', paddingLeft: 16 }}>
+          <div className='header-container'>
             <Burger
+              color='white'
               opened={opened}
               onClick={toggle}
               hiddenFrom="sm"
               size="sm"
-              style={{ marginRight: 12 }}
+              style={{ marginRight: 12, color: 'white' }}
             />
-            <Text style={{fontSize: 24}} ta="center">
-              <strong>Machine talking</strong> only when human is lazy enough to stop seeking with their own mind
-              </Text>
+            <NavLink component={Link} to="/" label="Home" />
+            <NavLink component={Link} to="/lab" label="Lab" />
           </div>
         </AppShell.Header>
 
-        <AppShell.Navbar p="md">
-          <GlobalNavigation toggle={toggle} />
-        </AppShell.Navbar>
-
-        <AppShell.Main>
-            <Container>
-              <Routes>
-                <Route path="/" element={<HousePricePrediction />} />
-                <Route path="/mnist" element={<Mnist />} />
-                <Route path="/linear-regression" element={<LinearRegression />} />
-              </Routes>
-            </Container>
+        <AppShell.Main style={{ padding: '0' }}>
+          <Routes>
+            <Route path="/lab/*" element={<Lab toggle={toggle} />} />
+            <Route path="/" element={<Home/>} />
+          </Routes>
         </AppShell.Main>
       </AppShell>
     </BrowserRouter>
