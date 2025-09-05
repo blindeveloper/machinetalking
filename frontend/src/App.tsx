@@ -31,7 +31,7 @@ function App() {
               style={{ marginRight: 12, color: 'white' }}
             />
             <NavLink component={Link} to="/" label="Home" />
-            <NavLink component={Link} to="/lab" label="Lab" />
+            <NavLink component={Link} to="/lab" label="Lab" onClick={toggle} />
           </div>
         </AppShell.Header>
 
