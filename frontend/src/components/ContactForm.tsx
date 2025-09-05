@@ -1,17 +1,10 @@
-import { Button, Group} from '@mantine/core';
+import { Button } from '@mantine/core';
 
 function ContactForm() {
   return (
-    <form 
-      action="mailto:blindeveloper@gmail.com"
-      method="POST"
-      encType="text/plain">
-
-      <Group justify="flex-end" mt="md">
-        <Button type="submit" variant="filled" color="teal">Contact us</Button>
-      </Group>
-      
-    </form>
+    <a href="mailto:blindeveloper@gmail.com?subject=Project%20idea">
+        <Button variant="filled" color="teal">Contact us</Button>
+    </a>
   );
 }
 
