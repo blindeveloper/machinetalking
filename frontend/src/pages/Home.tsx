@@ -6,6 +6,7 @@ export default function Home() {
     <div className='page-container'>
       <section className="page-section">
         <p>Imagine a place where you can bring your machine learning ideas to life, where data meets creativity and innovation</p>
+        
       </section>
       <section className="page-section">
         <p>A place where complex ML problems turn into elegant, working solutions — models, predictions, and insights crafted for your goals.</p>
