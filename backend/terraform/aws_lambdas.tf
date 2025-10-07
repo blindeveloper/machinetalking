@@ -44,7 +44,18 @@ resource "aws_lambda_function" "pytorch_lambda" {
   package_type  = "Image"
   architectures    = ["arm64"]
 
-  image_uri     = "${aws_ecr_repository.pytorch_repo.repository_url}:${var.image_tag}"
+  image_uri     = "${aws_ecr_repository.pytorch_repo.repository_url}:${var.pytorch_lambda_image_tag}"
+  role          = aws_iam_role.lambda_role.arn
+  timeout       = 900 # Max for Lambda
+  memory_size   = 3008
+}
+
+# Lambda function (using ECR container image)
+resource "aws_lambda_function" "lang_chain_lambda" {
+  function_name = "lang_chain_lambda"
+  package_type  = "Image"
+  architectures    = ["arm64"]
+  image_uri     = "${aws_ecr_repository.lang_chain_repo.repository_url}:${var.lang_chain_lambda_image_tag}"
   role          = aws_iam_role.lambda_role.arn
   timeout       = 900 # Max for Lambda
   memory_size   = 3008

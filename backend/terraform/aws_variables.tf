@@ -12,6 +12,10 @@ variable "lambda_function_name" {
   default = "pytorch-lambda-fn"
 }
 
-variable "image_tag" {
+variable "pytorch_lambda_image_tag" {
   default = "20250903215442"
+}
+
+variable "lang_chain_lambda_image_tag" {
+  default = "20251007154635"
 }
