@@ -21,5 +21,5 @@ resource "aws_s3_bucket" "lr_model_bucket" {
 resource "aws_s3_object" "lr_model_file" {
   bucket = aws_s3_bucket.lr_model_bucket.id
   key    = "model.pth"
-  source = "../models/linear_regression/saved_models/model.pth"
+  source = "../apps/linear_regression/saved_apps/model.pth"
 }

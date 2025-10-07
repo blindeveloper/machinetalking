@@ -1,1 +1,1 @@
-python3 ../../models/house_price_prediction/get_model.py
+python3 ../../apps/house_price_prediction/get_model.py
