@@ -17,5 +17,5 @@ variable "pytorch_lambda_image_tag" {
 }
 
 variable "lang_chain_lambda_image_tag" {
-  default = "20251007154635"
+  default = "20251007160403"
 }

@@ -109,3 +109,24 @@ resource "aws_iam_role_policy_attachment" "apigateway_cloudwatch_attach" {
   role       = aws_iam_role.apigateway_cloudwatch.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
+
+resource "aws_ecr_lifecycle_policy" "lang_chain_policy" {
+  repository = aws_ecr_repository.lang_chain_repo.name
+
+  policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep only the latest 1 image"
+        selection = {
+          tagStatus = "any"
+          countType = "imageCountMoreThan"
+          countNumber = 1
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+}

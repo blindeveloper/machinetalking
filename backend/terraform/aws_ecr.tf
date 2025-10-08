@@ -15,3 +15,8 @@ resource "aws_ecr_repository" "lang_chain_repo" {
 output "langchain_ecr_repo_url" {
   value = aws_ecr_repository.lang_chain_repo.repository_url
 }
+
+data "aws_ecr_image" "lang_chain_latest" {
+  repository_name = aws_ecr_repository.lang_chain_repo.name
+  image_tag       = "latest"
+}

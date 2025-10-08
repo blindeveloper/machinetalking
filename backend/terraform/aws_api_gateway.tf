@@ -60,6 +60,13 @@ resource "aws_apigatewayv2_integration" "pytorch_lambda_integration" {
   integration_type = "AWS_PROXY"
   integration_uri  = aws_lambda_function.pytorch_lambda.invoke_arn
 }
+
+resource "aws_apigatewayv2_integration" "lang_chain_lambda_integration" {
+  api_id                 = aws_apigatewayv2_api.http_api.id
+  integration_type       = "AWS_PROXY"
+  integration_uri        = aws_lambda_function.lang_chain_lambda.invoke_arn
+  payload_format_version = "2.0"
+}
 # =============================================
 # Route mappings
 # =============================================
@@ -74,3 +81,10 @@ resource "aws_apigatewayv2_route" "lin_reg_predict" {
   route_key = "POST /lin_reg/predict"
   target    = "integrations/${aws_apigatewayv2_integration.pytorch_lambda_integration.id}"
 }
+
+resource "aws_apigatewayv2_route" "lang_chain_route" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "POST /lang_chain/predict"
+  target    = "integrations/${aws_apigatewayv2_integration.lang_chain_lambda_integration.id}"
+}
+

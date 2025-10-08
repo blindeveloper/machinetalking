@@ -38,6 +38,14 @@ resource "aws_lambda_permission" "allow_http_api_pytorch" {
   source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*"
 }
 
+resource "aws_lambda_permission" "lang_chain_apigw" {
+  statement_id  = "AllowAPIGatewayInvokePytorch"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lang_chain_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*"
+}
+
 # Lambda function (using ECR container image)
 resource "aws_lambda_function" "pytorch_lambda" {
   function_name = var.lambda_function_name
@@ -55,7 +63,8 @@ resource "aws_lambda_function" "lang_chain_lambda" {
   function_name = "lang_chain_lambda"
   package_type  = "Image"
   architectures    = ["arm64"]
-  image_uri     = "${aws_ecr_repository.lang_chain_repo.repository_url}:${var.lang_chain_lambda_image_tag}"
+  image_uri     = "${aws_ecr_repository.lang_chain_repo.repository_url}@${data.aws_ecr_image.lang_chain_latest.image_digest}"
+
   role          = aws_iam_role.lambda_role.arn
   timeout       = 900 # Max for Lambda
   memory_size   = 3008

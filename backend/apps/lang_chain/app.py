@@ -1,8 +1,14 @@
-def lambda_handler(event, context):
-  return {
-    "statusCode": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": "Hello from new lambda"
-  }
+from fastapi import FastAPI
+from mangum import Mangum
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class PredictRequest(BaseModel):
+    input: str
+
+@app.post("/lang_chain/predict")
+def predict(request: PredictRequest):
+    return {"output": f"You sent: {request.input}"}
+
+handler = Mangum(app)

@@ -6,8 +6,8 @@ AWS_REGION="eu-central-1"
 ACCOUNT_ID="815033077205"
 ECR_REPO_NAME="lang_chain_lambda"
 
-# IMAGE_TAG="latest"
-IMAGE_TAG=$(date +%Y%m%d%H%M%S)  # timestamp tag
+# IMAGE_TAG=$(date +%Y%m%d%H%M%S)  # timestamp tag
+IMAGE_TAG="latest"
 LAMBDA_ARCH="arm64"   # or x86_64 if using AMD64
 
 # --- DETERMINE PLATFORM ---
